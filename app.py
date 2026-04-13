@@ -105,10 +105,10 @@ if uploaded_file is not None:
         st.title("Wordcloud")
         # df_wc = helper.create_wordcloud(selected_user,df)
         df_wc = helper.create_wordcloud(selected_user, df)
-if df_wc is None:
-    st.warning("No valid words found for word cloud.")
-else:
-    st.pyplot(df_wc)
+          if df_wc is None:
+             st.warning("No valid words found for word cloud.")
+          else:
+             st.pyplot(df_wc)
     
         fig,ax = plt.subplots()
         ax.imshow(df_wc)
