@@ -101,20 +101,16 @@ if uploaded_file is not None:
             with col2:
                 st.dataframe(new_df)
 
-        # WordCloud
-        st.title("Wordcloud")
-        # df_wc = helper.create_wordcloud(selected_user,df)
-        df_wc = helper.create_wordcloud(selected_user, df)
-        if df_wc is None:
-             st.warning("No valid words found for word cloud.")
-        else:
-             st.pyplot(df_wc)
-    
-        fig,ax = plt.subplots()
-        ax.imshow(df_wc)
-        ax.axis("off")
-        st.pyplot(fig)
-
+       # WordCloud
+       st.title("Wordcloud")
+       df_wc = helper.create_wordcloud(selected_user, df)
+       if df_wc is None:
+         st.warning("No valid words found for word cloud.")
+       else:
+          fig, ax = plt.subplots()
+          ax.imshow(df_wc, interpolation="bilinear")
+          ax.axis("off")
+          st.pyplot(fig)
         
 
         # most common words
