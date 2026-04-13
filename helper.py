@@ -34,6 +34,13 @@ def most_busy_users(df):
     df = round((df['user'].value_counts() / df.shape[0]) * 100, 2).reset_index().rename(
         columns={'index': 'name', 'user': 'percent'})
     return x,df
+text = temp['message'].dropna().astype(str).str.cat(sep=" ")
+
+if len(text.strip()) == 0:
+    st.warning("No valid words found for word cloud.")
+else:
+    df_wc = wc.generate(text)
+    st.pyplot(df_wc)
 
 def create_wordcloud(selected_user,df):
 
@@ -59,13 +66,7 @@ def create_wordcloud(selected_user,df):
     
     return df_wc
 
-text = temp['message'].dropna().astype(str).str.cat(sep=" ")
 
-if len(text.strip()) == 0:
-    st.warning("No valid words found for word cloud.")
-else:
-    df_wc = wc.generate(text)
-    st.pyplot(df_wc)
 def most_common_words(selected_user,df):
 
     f = open('stop_hinglish.txt','r')
