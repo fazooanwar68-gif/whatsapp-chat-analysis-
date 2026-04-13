@@ -56,9 +56,16 @@ def create_wordcloud(selected_user,df):
     wc = WordCloud(width=500,height=500,min_font_size=10,background_color='white')
     temp['message'] = temp['message'].apply(remove_stop_words)
     df_wc = wc.generate(temp['message'].astype(str).str.cat(sep=" "))
-    # df_wc = wc.generate(temp['message'].str.cat(sep=" "))
+    
     return df_wc
 
+text = temp['message'].dropna().astype(str).str.cat(sep=" ")
+
+if len(text.strip()) == 0:
+    st.warning("No valid words found for word cloud.")
+else:
+    df_wc = wc.generate(text)
+    st.pyplot(df_wc)
 def most_common_words(selected_user,df):
 
     f = open('stop_hinglish.txt','r')
